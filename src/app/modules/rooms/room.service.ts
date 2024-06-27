@@ -1,7 +1,8 @@
 import httpStatus from "http-status";
 import { Room } from "./room.model";
+import { IRoom } from "./room.interface";
 
-const createRoom = async (payload: any) => {
+const createRoom = async (payload: IRoom) => {
   const room = await Room.create(payload);
   return room;
 };
@@ -21,7 +22,7 @@ const getAllRooms = async () => {
   return rooms;
 };
 
-const updateRoom = async (roomId: string, payload: any) => {
+const updateRoom = async (roomId: string, payload: IRoom) => {
   const room = await Room.findByIdAndUpdate(roomId, payload, { new: true });
 
   if (!room) {

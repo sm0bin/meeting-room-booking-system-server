@@ -1,6 +1,6 @@
+import httpStatus from "http-status";
 import { Slot } from "./slot.model";
 import { ISlot } from "./slot.interface";
-import httpStatus from "http-status";
 
 const createSlot = async (payload: ISlot) => {
   const slot = await Slot.create(payload);

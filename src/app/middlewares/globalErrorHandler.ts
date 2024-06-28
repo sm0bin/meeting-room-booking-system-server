@@ -1,12 +1,12 @@
 import { ErrorRequestHandler } from "express";
 import { ZodError } from "zod";
 import config from "../config";
+import { IErrorSources } from "../interface/error";
 import AppError from "../errors/AppError";
-import handleCastError from "../errors/handleCastError";
+import handleZodError from "../errors/handleZodError";
 import handleDuplicateError from "../errors/handleDuplicateError";
 import handleValidationError from "../errors/handleValidationError";
-import handleZodError from "../errors/handleZodError";
-import { IErrorSources } from "../interface/error";
+import handleCastError from "../errors/handleCastError";
 
 const handleError = (err: any, handler: Function) => {
   const { statusCode, message, errorSources } = handler(err);

@@ -7,7 +7,6 @@ import { BookingRoutes } from "../modules/bookings/booking.route";
 const router = Router();
 
 const moduleRoutes = [
-  // Import routes here
   {
     path: "/auth",
     route: AuthRoutes,

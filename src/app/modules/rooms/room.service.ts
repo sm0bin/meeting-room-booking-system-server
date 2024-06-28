@@ -1,6 +1,7 @@
 import httpStatus from "http-status";
 import { Room } from "./room.model";
 import { IRoom } from "./room.interface";
+import AppError from "../../errors/AppError";
 
 const createRoom = async (payload: IRoom) => {
   const room = await Room.create(payload);

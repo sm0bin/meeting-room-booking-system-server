@@ -27,7 +27,7 @@ const getAllBookings = async (req: Request, res: Response) => {
 };
 
 const getUserBookings = async (req: Request, res: Response) => {
-  const bookings = await BookingServices.getUserBookings(req.user._id);
+  const bookings = await BookingServices.getUserBookings("User ID 111");
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

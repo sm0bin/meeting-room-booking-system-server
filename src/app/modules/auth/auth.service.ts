@@ -1,6 +1,8 @@
 import httpStatus from "http-status";
 import { ILoginUser } from "./auth.interface";
 import { User } from "../users/user.model";
+import { IUser } from "../users/user.interface";
+import AppError from "../../errors/AppError";
 
 const loginUser = async (payload: ILoginUser) => {
   const { email, password } = payload;
@@ -21,7 +23,14 @@ const loginUser = async (payload: ILoginUser) => {
   return user;
 };
 
-const signupUser = async (payload: any) => {
+const signupUser = async (payload: IUser) => {
+  const { email } = payload;
+  const existingUser = await User.findOne({ email });
+
+  if (existingUser) {
+    throw new AppError(httpStatus.BAD_REQUEST, "User already exists");
+  }
+
   const user = await User.create(payload);
 
   return user;

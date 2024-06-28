@@ -1,6 +1,7 @@
 import httpStatus from "http-status";
 import { IBooking } from "./booking.interface";
 import { Booking } from "./booking.model";
+import AppError from "../../errors/AppError";
 
 const createBooking = async (payload: IBooking) => {
   const newBooking = await Booking.create(payload);

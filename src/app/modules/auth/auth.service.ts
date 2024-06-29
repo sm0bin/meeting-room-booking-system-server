@@ -14,9 +14,16 @@ const loginUser = async (payload: ILoginUser) => {
     throw new AppError(httpStatus.NOT_FOUND, "User not found");
   }
 
-  if (user.password !== password) {
-    throw new AppError(httpStatus.BAD_REQUEST, "Password is incorrect");
+  const isPasswordMatch = await bcrypt.compare(password, user.password);
+
+  if (!isPasswordMatch) {
+    throw new AppError(httpStatus.BAD_REQUEST, "Invalid credentials");
   }
+
+  const { password: userPassword, ...userWithoutPassword } = user.toObject();
+  // if (user.password !== password) {
+  //   throw new AppError(httpStatus.BAD_REQUEST, "Password is incorrect");
+  // }
   // const isPasswordMatch = await user.comparePassword(payload.password);
 
   // if (!isPasswordMatch) {
@@ -29,7 +36,7 @@ const loginUser = async (payload: ILoginUser) => {
 
   return {
     token,
-    user,
+    user: { userWithoutPassword },
   };
 };
 

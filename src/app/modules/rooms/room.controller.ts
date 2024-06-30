@@ -10,7 +10,7 @@ const createRoom = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
     success: true,
-    message: "Room is created successfully!",
+    message: "Room added successfully",
     data: result,
   });
 });
@@ -21,7 +21,7 @@ const getRoomById = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Room is fetched successfully!",
+    message: "Room retrieved successfully",
     data: result,
   });
 });
@@ -32,7 +32,7 @@ const getAllRooms = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "All rooms are fetched successfully!",
+    message: "Rooms retrieved successfully",
     data: result,
   });
 });
@@ -43,7 +43,7 @@ const updateRoom = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Room is updated successfully!",
+    message: "Room updated successfully",
     data: result,
   });
 });
@@ -54,7 +54,7 @@ const deleteRoom = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Room is deleted successfully!",
+    message: "Room deleted successfully",
     data: result,
   });
 });

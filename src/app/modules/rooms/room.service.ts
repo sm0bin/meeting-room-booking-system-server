@@ -34,7 +34,7 @@ const updateRoom = async (roomId: string, payload: IRoom) => {
 };
 
 const deleteRoom = async (roomId: string) => {
-  const room = await Room.findByIdAndDelete(roomId);
+  const room = await Room.findByIdAndUpdate(roomId);
 
   if (!room) {
     throw new AppError(httpStatus.NOT_FOUND, "Room not found");

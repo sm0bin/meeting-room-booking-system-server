@@ -16,12 +16,17 @@ const createSlots = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getAvailableSlots = catchAsync(async (req: Request, res: Response) => {
-  const result = await SlotServices.getAvailableSlots();
+  const { date, roomID } = req.query;
+  let query: Record<string, unknown> = { isBooked: false };
+  if (date) query.date = date;
+  if (roomID) query.room = roomID;
+
+  const result = await SlotServices.getAvailableSlots(query);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Available slots are fetched successfully!",
+    message: "Available slots retrieved successfully",
     data: result,
   });
 });

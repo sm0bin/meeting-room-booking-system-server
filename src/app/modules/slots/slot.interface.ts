@@ -15,3 +15,8 @@ export interface ISlot {
   endTime: string;
   isBooked: boolean;
 }
+
+// export interface IAvailableSlotPayload {
+//   date: Date;
+//   roomID: Types.ObjectId;
+// }

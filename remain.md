@@ -118,38 +118,6 @@ You must include "Bearer" at the beginning of the token! Do not copy and apply d
 }
 ```
 
-**Hints for creating slots:**
-
-1. **Retrieve Slot Duration**: Assume the slot duration is provided or retrieved from the database. For this example, we'll use a slot duration of 60 minutes.
-2. **Parse Request Body**: Extract the necessary information from the request body:
-   - Start time: "09:00"
-   - End time: "14:00"
-   - Slot duration: 60 minutes
-3. **Calculate the Total Duration**:
-   - Convert the start time and end time to minutes since midnight.
-   - Calculate the total duration between the start and end times in minutes.
-4. **Generate Slot Time Intervals**:
-   - Determine the number of slots by dividing the total duration by the service duration.
-   - Generate start and end times for each slot.
-5. **Example Calculation - Step-by-Step Breakdown**:
-   1. **Slot Duration**: 60 minutes
-   2. **Start Time and End Time**:
-      - Start Time: "09:00"
-      - End Time: "14:00"
-   3. **Convert Times to Minutes**:
-      - "09:00" → 9 \* 60 = 540 minutes since midnight
-      - "14:00" → 14 \* 60 = 840 minutes since midnight
-   4. **Calculate Total Duration**:
-      - Total Duration: 840 minutes - 540 minutes = 300 minutes
-   5. **Number of Slots**:
-      - Number of Slots: 300 minutes / 60 minutes per slot = 5 slots
-   6. **Generate Slot Time Intervals**:
-      - Slot 1: Start Time: "09:00", End Time: "10:00"
-      - Slot 2: Start Time: "10:00", End Time: "11:00"
-      - Slot 3: Start Time: "11:00", End Time: "12:00"
-      - Slot 4: Start Time: "12:00", End Time: "13:00"
-      - Slot 5: Start Time: "13:00", End Time: "14:00"
-
 **9\. Get available slots**
 
 **Route:** `/api/slots/availability`(**GET**)

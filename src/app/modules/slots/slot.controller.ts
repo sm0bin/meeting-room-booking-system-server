@@ -4,13 +4,13 @@ import httpStatus from "http-status";
 import { Request, Response } from "express";
 import { SlotServices } from "./slot.service";
 
-const createSlot = catchAsync(async (req: Request, res: Response) => {
-  const result = await SlotServices.createSlot(req.body);
+const createSlots = catchAsync(async (req: Request, res: Response) => {
+  const result = await SlotServices.createSlots(req.body);
 
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
     success: true,
-    message: "Slot is created successfully!",
+    message: "Slots created successfully",
     data: result,
   });
 });
@@ -27,6 +27,6 @@ const getAvailableSlots = catchAsync(async (req: Request, res: Response) => {
 });
 
 export const SlotController = {
-  createSlot,
+  createSlots,
   getAvailableSlots,
 };

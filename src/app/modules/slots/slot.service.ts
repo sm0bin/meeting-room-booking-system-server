@@ -1,11 +1,17 @@
 import httpStatus from "http-status";
 import { Slot } from "./slot.model";
-import { ISlot } from "./slot.interface";
+import { ISlotPayload } from "./slot.interface";
 import AppError from "../../errors/AppError";
+import { generateSlots } from "./slot.utils";
 
-const createSlot = async (payload: ISlot) => {
-  const slot = await Slot.create(payload);
-  return slot;
+const createSlots = async (payload: ISlotPayload) => {
+  const generatedSlots = await generateSlots({ ...payload, slotDuration: 60 });
+
+  console.log(generatedSlots);
+  const slots = await Slot.insertMany(generatedSlots);
+  console.log(slots);
+
+  return slots;
 };
 
 const getAvailableSlots = async () => {
@@ -19,6 +25,6 @@ const getAvailableSlots = async () => {
 };
 
 export const SlotServices = {
-  createSlot,
+  createSlots,
   getAvailableSlots,
 };

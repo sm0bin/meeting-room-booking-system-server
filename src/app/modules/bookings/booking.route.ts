@@ -8,13 +8,17 @@ const router = Router();
 
 router.post(
   "/",
-  authVerify(),
+  authVerify("user"),
   validateRequest(createBookingSchema),
   BookingController.createBooking
 );
-router.get("/", authVerify(), BookingController.getAllBookings);
-router.get("/my-bookings", authVerify(), BookingController.getUserBookings);
-router.put("/:id", authVerify(), BookingController.updateBooking);
-router.delete("/:id", authVerify(), BookingController.deleteBooking);
+router.get("/", authVerify("admin"), BookingController.getAllBookings);
+router.get(
+  "/my-bookings",
+  authVerify("user"),
+  BookingController.getUserBookings
+);
+router.put("/:id", authVerify("admin"), BookingController.updateBooking);
+router.delete("/:id", authVerify("admin"), BookingController.deleteBooking);
 
 export const BookingRoutes = router;

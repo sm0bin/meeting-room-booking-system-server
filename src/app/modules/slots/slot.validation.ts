@@ -8,6 +8,5 @@ export const createSlotSchema = z.object({
       .refine((val) => !isNaN(Date.parse(val)), "Invalid date format"),
     startTime: z.string().min(1, "Start time is required"),
     endTime: z.string().min(1, "End time is required"),
-    isBooked: z.boolean().default(false),
   }),
 });

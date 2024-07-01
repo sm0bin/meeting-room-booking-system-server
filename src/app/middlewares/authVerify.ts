@@ -28,33 +28,33 @@ const authVerify = (...requiredRoles: TUserRole[]) => {
       throw new AppError(httpStatus.UNAUTHORIZED, "Token is missing");
     }
 
-    try {
-      // verify token
-      const decoded = (await jwt.verify(
-        token,
-        config.jwtSecret as string
-      )) as JwtPayload;
-      const { id } = decoded;
+    // try {
+    // verify token
+    const decoded = (await jwt.verify(
+      token,
+      config.jwtSecret as string
+    )) as JwtPayload;
+    const { id } = decoded;
 
-      const user = await User.findById(id);
+    const user = await User.findById(id);
 
-      if (!user) {
-        throw new AppError(httpStatus.NOT_FOUND, "User not found");
-      }
-
-      if (requiredRoles && !requiredRoles.includes(user.role)) {
-        throw new AppError(
-          httpStatus.FORBIDDEN,
-          "You do not have permission to access this resource"
-        );
-      }
-
-      req.user = user as IUser;
-
-      next();
-    } catch (error) {
-      throw new AppError(httpStatus.UNAUTHORIZED, "Invalid token");
+    if (!user) {
+      throw new AppError(httpStatus.NOT_FOUND, "User not found");
     }
+
+    if (requiredRoles && !requiredRoles.includes(user.role)) {
+      throw new AppError(
+        httpStatus.FORBIDDEN,
+        "You have no access to this route"
+      );
+    }
+
+    req.user = user as IUser;
+
+    next();
+    // } catch (error) {
+    //   throw new AppError(httpStatus.UNAUTHORIZED, "Invalid token");
+    // }
   });
 };
 

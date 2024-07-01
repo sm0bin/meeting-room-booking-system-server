@@ -36,7 +36,11 @@ const updateBooking = async (id: string, payload: IBooking) => {
 };
 
 const deleteBooking = async (id: string) => {
-  const booking = await Booking.findByIdAndDelete(id);
+  const booking = await Booking.findByIdAndUpdate(
+    id,
+    { isDeleted: true },
+    { new: true }
+  );
 
   if (!booking) {
     throw new AppError(httpStatus.NOT_FOUND, "Booking not found");

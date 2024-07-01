@@ -4,18 +4,18 @@ import httpStatus from "http-status";
 import { Request, Response } from "express";
 import { BookingServices } from "./booking.service";
 
-const createBooking = async (req: Request, res: Response) => {
-  const booking = await BookingServices.createBooking(req.body);
+const createBooking = catchAsync(async (req: Request, res: Response) => {
+  const result = await BookingServices.createBooking(req.body);
 
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
     success: true,
-    message: "Booking is created successfully!",
-    data: booking,
+    message: "Booking created successfully",
+    data: result,
   });
-};
+});
 
-const getAllBookings = async (req: Request, res: Response) => {
+const getAllBookings = catchAsync(async (req: Request, res: Response) => {
   const bookings = await BookingServices.getAllBookings();
 
   sendResponse(res, {
@@ -24,10 +24,10 @@ const getAllBookings = async (req: Request, res: Response) => {
     message: "All bookings are fetched successfully!",
     data: bookings,
   });
-};
+});
 
-const getUserBookings = async (req: Request, res: Response) => {
-  const bookings = await BookingServices.getUserBookings("User ID 111");
+const getUserBookings = catchAsync(async (req: Request, res: Response) => {
+  const bookings = await BookingServices.getUserBookings(req.user.id);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -35,9 +35,9 @@ const getUserBookings = async (req: Request, res: Response) => {
     message: "User bookings are fetched successfully!",
     data: bookings,
   });
-};
+});
 
-const updateBooking = async (req: Request, res: Response) => {
+const updateBooking = catchAsync(async (req: Request, res: Response) => {
   const booking = await BookingServices.updateBooking(req.params.id, req.body);
 
   sendResponse(res, {
@@ -46,9 +46,9 @@ const updateBooking = async (req: Request, res: Response) => {
     message: "Booking is updated successfully!",
     data: booking,
   });
-};
+});
 
-const deleteBooking = async (req: Request, res: Response) => {
+const deleteBooking = catchAsync(async (req: Request, res: Response) => {
   await BookingServices.deleteBooking(req.params.id);
 
   sendResponse(res, {
@@ -56,7 +56,7 @@ const deleteBooking = async (req: Request, res: Response) => {
     success: true,
     message: "Booking is deleted successfully!",
   });
-};
+});
 
 export const BookingController = {
   createBooking,

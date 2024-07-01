@@ -49,7 +49,7 @@ const authVerify = (...requiredRoles: TUserRole[]) => {
       );
     }
 
-    req.user = user as IUser;
+    req.user = decoded as JwtPayload;
 
     next();
     // } catch (error) {

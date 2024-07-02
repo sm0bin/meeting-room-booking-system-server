@@ -11,8 +11,8 @@ const createBooking = async (payload: ICreateBooking) => {
 
   // Fetch room, slots, and user data concurrently
   const [roomData, slotsData, userData] = await Promise.all([
-    Room.findById(room),
-    Slot.find({ _id: { $in: slots } }),
+    Room.findOne({ _id: room, isDeleted: false }),
+    Slot.find({ _id: { $in: slots }, isBooked: false }),
     User.findById(user).select("-password"),
   ]);
 

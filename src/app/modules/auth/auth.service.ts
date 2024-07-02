@@ -55,7 +55,7 @@ const signupUser = async (payload: IUser) => {
 
   const { password: userPassword, ...userWithoutPassword } = user.toObject();
 
-  return { userWithoutPassword };
+  return userWithoutPassword;
 };
 
 export const AuthServices = {
